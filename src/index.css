@@ -1,0 +1,107 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Domain accent colors — restrained, Microsoft-inspired, used only to
+     distinguish conceptual domains on the map, tracks, and tags. */
+  --color-domain-identity: #6b46c1;
+  --color-domain-endpoint: #0f6cbd;
+  --color-domain-m365: #0078d4;
+  --color-domain-azure: #50e6ff;
+  --color-domain-security: #d13438;
+  --color-domain-coordination: #107c10;
+  --color-domain-licensing: #986f0b;
+  --color-domain-foundation: #5c6470;
+  --color-domain-migration: #8764b8;
+}
+
+:root {
+  --bg: #f5f6f8;
+  --bg-elevated: #ffffff;
+  --bg-sunken: #eceef2;
+  --border: #d8dce3;
+  --border-strong: #b7bec9;
+  --text: #1b1f27;
+  --text-muted: #545c6b;
+  --text-faint: #7c8494;
+  --accent: #0f6cbd;
+  --accent-strong: #0a4d8c;
+  --focus-ring: #0f6cbd;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0f1218;
+  --bg-elevated: #171c26;
+  --bg-sunken: #0a0d12;
+  --border: #262c38;
+  --border-strong: #363f4f;
+  --text: #e7eaf0;
+  --text-muted: #a6aebc;
+  --text-faint: #707a8c;
+  --accent: #4cc2ff;
+  --accent-strong: #7fd4ff;
+  --focus-ring: #4cc2ff;
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Subtle network/grid backdrop used behind the command center and map shell. */
+.bg-grid {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
